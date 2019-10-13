@@ -691,7 +691,7 @@ int mine(int choice1, int choice2, int choice3, struct gameState *state, int han
         return -1;
     }
 
-    if (choice2 > treasure_map || choice2 < curse)
+    if (choice2 > treasure_map && choice2 < curse)
     {
         return -1;
     }
