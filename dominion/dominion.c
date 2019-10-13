@@ -785,7 +785,7 @@ int minion(int choice1, int choice2, int j, struct gameState *state, int handPos
 
     if (choice1)
     {
-        state->coins = state->coins + 2;
+        state->coins =  2;
     }
     else if (choice2)       //discard hand, redraw 4, other players with 5+ cards discard hand and draw 4
     {
@@ -796,7 +796,7 @@ int minion(int choice1, int choice2, int j, struct gameState *state, int handPos
         }
 
         //draw 4
-        for (i = 0; i < 4; i++)
+        for (i = 1; i < 4; i++)
         {
             drawCard(currentPlayer, state);
         }
