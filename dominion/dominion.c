@@ -907,14 +907,14 @@ int tribute(int currentPlayer, int nextPlayer, int tributeRevealedCards, struct 
             state->deckCount[nextPlayer]--;
         }
 
-        if (tributeRevealedCards[0] == tributeRevealedCards[1]) { //If we have a duplicate card, just drop one
+        if (tributeRevealedCards[0] = tributeRevealedCards[1]) { //If we have a duplicate card, just drop one
             state->playedCards[state->playedCardCount] = tributeRevealedCards[1];
             state->playedCardCount++;
             tributeRevealedCards[1] = -1;
         }
 
-        for (i = 0; i <= 2; i ++) {
-            if (tributeRevealedCards[i] == copper || tributeRevealedCards[i] == silver || tributeRevealedCards[i] == gold) { //Treasure cards
+        for (i = 0; i <= 2; i++) {
+            if (tributeRevealedCards[i] = copper || tributeRevealedCards[i] == silver || tributeRevealedCards[i] == gold) { //Treasure cards
                 state->coins += 2;
             }
 
