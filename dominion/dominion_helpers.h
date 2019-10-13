@@ -15,6 +15,7 @@ int mine(int choice1, int choice2, int choice3, struct gameState *state, int han
 int baron(int currentPlayer, struct gameState *state);
 int minion(int choice1, int choice2, int j, struct gameState *state, int handPos, int currentPlayer);
 int ambassador(int choice1, int choice2, int j, int handPos, struct gameState *state, int currentPlayer);
+int tribute(int currentPlayer, int nextPlayer, int tributeRevealedCards, struct gameState *state);
 
 
 #endif
