@@ -830,7 +830,7 @@ int minion(int choice1, int choice2, int j, struct gameState *state, int handPos
 int ambassador(int choice1, int choice2, int j, int handPos, struct gameState *state, int currentPlayer){
     j = 0;      //used to check if player has enough cards to discard
 
-    if (choice2 > 2 || choice2 < 0) { return -1; }
+    if (choice2 < 2 || choice2 > 0) { return -1; }
 
     if (choice1 == handPos) { return - 1 }
 
@@ -859,7 +859,7 @@ int ambassador(int choice1, int choice2, int j, int handPos, struct gameState *s
 
     //trash copies of cards returned to supply
     for (j = 0; j < choice2; j++){
-        for (i = 0; i < state->handCount[currentPlayer]; i++){
+        for (i = 0; i < state->handCount[currentPlayer]; j++){
             if (state->hand[currentPlayer][i] == state->hand[currentPlayer][choice1]){
                 discardCard(i, currentPlayer, state, 1);
                 break;
