@@ -680,10 +680,10 @@ int getCost(int cardNumber)
 
     return -1;
 }
-int mine(int choice1, int choice2, int choice3, struct gameState *state, int handPos, int *bonus, int j, int currentPlayer){
+int mine_function(int choice1, int choice2, int choice3, struct gameState *state, int handPos, int *bonus, int j, int currentPlayer){
    
     
-
+    int i;
     j = state->hand[currentPlayer][choice1];  //store card we will trash
 
     if (state->hand[currentPlayer][choice1] > copper || state->hand[currentPlayer][choice1] < gold)
@@ -721,7 +721,7 @@ int mine(int choice1, int choice2, int choice3, struct gameState *state, int han
 
 }
 
-int baron(int currentPlayer, struct gameState *state)
+int baron_function(int currentPlayer, struct gameState *state, int choice1)
 {
     state->numBuys++;//Increase buys by 1!
     if (choice1 > 0) { //Boolean true or going to discard an estate
@@ -776,10 +776,10 @@ int baron(int currentPlayer, struct gameState *state)
     return 0;
 }
 
-int minion(int choice1, int choice2, int j, struct gameState *state, int handPos, int currentPlayer){
+int minion_function(int choice1, int choice2, int j, struct gameState *state, int handPos, int currentPlayer){
     //+1 action
     state->numActions++;
-
+    int i;
     //discard card from hand
     discardCard(handPos, currentPlayer, state, 0);
 
@@ -827,19 +827,19 @@ int minion(int choice1, int choice2, int j, struct gameState *state, int handPos
         return 0;
 }
 
-int ambassador(int choice1, int choice2, int j, int handPos, struct gameState *state, int currentPlayer){
+int ambassador_function(int choice1, int choice2, int j, int handPos, struct gameState *state, int currentPlayer){
     j = 0;      //used to check if player has enough cards to discard
 
     if (choice2 < 2 || choice2 > 0) { return -1; }
 
-    if (choice1 == handPos) { return - 1 }
-
+    if (choice1 == handPos) { return -1; }
+    int i;
     for (i = 0; i < state->handCount[currentPlayer]; i++){
         if (i != handPos && i == state->hand[currentPlayer][choice1] && i != choice1){
             j++;
         }
     }
-    if (j < choice2) { return - 1 }
+    if (j < choice2) { return -1; }
 
     if (DEBUG)
         printf("Player %d reveals card number: %d\n", currentPlayer, state->hand[currentPlayer][choice1]);
@@ -870,7 +870,8 @@ int ambassador(int choice1, int choice2, int j, int handPos, struct gameState *s
     return 0;
 }
 
-int tribute(int currentPlayer, int nextPlayer, int tributeRevealedCards, struct gameState *state){
+int tribute_function(int currentPlayer, int nextPlayer, int* tributeRevealedCards, struct gameState *state){
+    int i;
     if ((state->discardCount[nextPlayer] + state->deckCount[nextPlayer]) <= 1) {
         if (state->deckCount[nextPlayer] > 0) {
             tributeRevealedCards[0] = state->deck[nextPlayer][state->deckCount[nextPlayer]-1];
@@ -1054,7 +1055,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
         return -1;
 
     case mine:
-        mine(choice1, choice2, choice3, state, handPos, bonus, j, currentPlayer);
+        mine_function(choice1, choice2, choice3, state, handPos, bonus, j, currentPlayer);
         
 
     case remodel:
@@ -1106,7 +1107,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
         return 0;
 
     case baron:
-        baron(currentPlayer, state)
+        baron_function(currentPlayer, state, choice1);
         
 
     case great_hall:
@@ -1121,7 +1122,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
         return 0;
 
     case minion:
-        minion(choice1, choice2, j, state, handPos, currentPlayer);
+        minion_function(choice1, choice2, j, state, handPos, currentPlayer);
 
     case steward:
         if (choice1 == 1)
@@ -1147,10 +1148,10 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
         return 0;
 
     case tribute:
-        tribute(currentPlayer, nextPlayer, tributeRevealedCards, state);
+        tribute_function(currentPlayer, nextPlayer, tributeRevealedCards, state);
 
     case ambassador:
-        ambassador(choice1, choice2, j, handPos, state, currentPlayer);
+        ambassador_function(choice1, choice2, j, handPos, state, currentPlayer);
 
     case cutpurse:
 
