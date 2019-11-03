@@ -6,7 +6,7 @@ testme: testme.c
 	
 	-gcc -o testme -g testme.c $(CFLAGS)
 	-testme >> testme.out
-	-gcov testme.c -b -f >> tests.out
+	-gcov testme.c -b -f >> testme.out
 	
 
 clean:
