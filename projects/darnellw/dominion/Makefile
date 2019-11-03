@@ -14,13 +14,13 @@ testDrawCard: testDrawCard.c dominion.o rngs.o
 	gcc  -o testDrawCard -g  testDrawCard.c dominion.o rngs.o $(CFLAGS)
 
 cardtest1:	unittest1.c dominion.o rngs.o
-	gcc -o cardtest1 -g unittest1.c dominion.o rngs.o $(CFLAGS)
+	gcc -o -fprofile-arcs -ftest-coverage cardtest1 -g unittest1.c dominion.o rngs.o $(CFLAGS)
 
 interface.o: interface.h interface.c
 	gcc -c interface.c -g  $(CFLAGS)
 
-runtests: testDrawCard 
-	./testDrawCard &> unittestresult.out
+runtests: unittest1
+	./unittest1 &> unittestresult.out
 	gcov dominion.c >> unittestresult.out
 	cat dominion.c.gcov >> unittestresult.out
 
