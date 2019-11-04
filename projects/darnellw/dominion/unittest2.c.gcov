@@ -1,0 +1,34 @@
+        -:    0:Source:unittest2.c
+        -:    0:Programs:2
+        -:    1:#include "dominion.h"
+        -:    2:#include "dominion_helpers.h"
+        -:    3:#include <string.h>
+        -:    4:#include <stdio.h>
+        -:    5:#include <assert.h>
+        -:    6:#include "rngs.h"
+        -:    7:#include <stdlib.h>
+        -:    8:
+        -:    9:#define TESTCARD "baron"
+        -:   10://int baron_function(int currentPlayer, struct gameState *state, int choice1)
+function main called 1 returned 100% blocks executed 100%
+        1:   11:int main () {
+        -:   12:
+        1:   13:int choice1 = 0;
+        1:   14:int currentPlayer = 0;
+        -:   15://setting up the test case taken from the example
+        -:   16:struct gameState G, testG;
+        1:   17:int numPlayers = 2;
+        1:   18:int seed = 1000;
+        1:   19:int k[10] = {copper, gold, silver, minion, mine, cutpurse,
+        -:   20:			sea_hag, tribute, smithy, council_room};
+        1:   21:initializeGame(numPlayers, k, seed, &G);
+call    0 returned 1
+        1:   22:memcpy(&testG, &G, sizeof(struct gameState));
+        -:   23:
+        1:   24:printf("%s", "This is the test for the baron card\n");
+call    0 returned 1
+        1:   25:baron_function(currentPlayer, &testG, choice1);
+call    0 returned 1
+        -:   26:
+        1:   27:return 0;
+        -:   28:}

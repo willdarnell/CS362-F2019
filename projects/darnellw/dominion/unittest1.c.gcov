@@ -12,78 +12,80 @@
         -:   10:
 function main called 1 returned 100% blocks executed 85%
         1:   11:int main () {
-        -:   12:
-        -:   13://int mine(int choice1, int choice2, int choice3, struct gameState *state, int handPos, int *bonus, int j, int currentPlayer){
-        1:   14:int handpos = 0, choice1 = 0, choice2 = 0, choice3 = 0, bonus = 0, j = 0;
-        -:   15:int return_number;
-        -:   16://setting up the test case taken from the example
-        -:   17:struct gameState G, testG;
-        1:   18:int numPlayers = 2;
-        1:   19:int seed = 1000;
-        1:   20:int k[10] = {copper, gold, silver, minion, mine, cutpurse,
-        -:   21:			sea_hag, tribute, smithy, council_room};
-        1:   22:initializeGame(numPlayers, k, seed, &G);
+        -:   12://inside of the dominion.c file, the first two conditionals, where I had inserted bugs are commented out because they
+        -:   13://cause the program to exit the function and return. the first test for return number finds both of the bugs.
+        -:   14:
+        -:   15://int mine(int choice1, int choice2, int choice3, struct gameState *state, int handPos, int *bonus, int j, int currentPlayer){
+        1:   16:int handpos = 0, choice1 = 0, choice2 = 0, choice3 = 0, bonus = 0, j = 0;
+        -:   17:int return_number;
+        -:   18://setting up the test case taken from the example
+        -:   19:struct gameState G, testG;
+        1:   20:int numPlayers = 2;
+        1:   21:int seed = 1000;
+        1:   22:int k[10] = {copper, gold, silver, minion, mine, cutpurse,
+        -:   23:			sea_hag, tribute, smithy, council_room};
+        1:   24:initializeGame(numPlayers, k, seed, &G);
 call    0 returned 1
-        1:   23:choice2 = 2;
-        1:   24:memcpy(&testG, &G, sizeof(struct gameState));
-        1:   25:printf("%s""%d", "THIS IS THE OPENING HAND COUNT: ", G.handCount[0]);
+        1:   25:choice2 = 2;
+        1:   26:memcpy(&testG, &G, sizeof(struct gameState));
+        1:   27:printf("%s""%d", "THIS IS THE OPENING HAND COUNT: ", G.handCount[0]);
 call    0 returned 1
-        1:   26:printf("%s", "\n");
+        1:   28:printf("%s", "\n");
 call    0 returned 1
-        -:   27:
-        1:   28:printf("%s", "This is the test for the mine card\n");
+        -:   29:
+        1:   30:printf("%s", "This is the test for the mine card\n");
 call    0 returned 1
-        1:   29:return_number = mine_function(choice1, choice2, choice3, &testG, handpos, bonus, j, 0);
+        1:   31:return_number = mine_function(choice1, choice2, choice3, &testG, handpos, bonus, j, 0);
 call    0 returned 1
-        1:   30:if ((G.hand[0][0] == copper) && (getCost(G.hand[0][0]) + 3 <= getCost(choice2))){
+        1:   32:if ((G.hand[0][0] == copper) && (getCost(G.hand[0][0]) + 3 <= getCost(choice2))){
 branch  0 taken 1 (fallthrough)
 branch  1 taken 0
 call    2 returned 1
 call    3 returned 1
 branch  4 taken 1 (fallthrough)
 branch  5 taken 0
-        1:   31:    if (return_number == 0){
+        1:   33:    if (return_number == 0){
 branch  0 taken 1 (fallthrough)
 branch  1 taken 0
-        1:   32:        printf("%s", "the function executed when it should\n");
+        1:   34:        printf("%s", "the function executed when it should\n");
 call    0 returned 1
-        -:   33:    }
-        -:   34:    else{
-    #####:   35:        printf("%s", "the function failed when it shouldn't\n");
+        -:   35:    }
+        -:   36:    else{
+    #####:   37:        printf("%s", "the function failed when it shouldn't\n");
 call    0 never executed
-        -:   36:    }
-        -:   37:
-        -:   38:}
+        -:   38:    }
         -:   39:
-        -:   40://test gainCard on line 706
-        -:   41://player gains one card, but then discards two, so the final handcount for the player should be 4.
-        -:   42:
-        1:   43:if (--G.handCount[0] == testG.handCount[0]){
+        -:   40:}
+        -:   41:
+        -:   42://test gainCard on line 706
+        -:   43://player gains one card, but then discards two, so the final handcount for the player should be 4.
+        -:   44:
+        1:   45:if (--G.handCount[0] == testG.handCount[0]){
 branch  0 taken 1 (fallthrough)
 branch  1 taken 0
-        1:   44:    printf("%s", "Player gained a card as they were meant to.\n");
+        1:   46:    printf("%s", "Player gained a card as they were meant to.\n");
 call    0 returned 1
-        -:   45:}
-        -:   46:else {
-    #####:   47:    printf("%s", "Player did not gain the card like they were meant to.\n");
+        -:   47:}
+        -:   48:else {
+    #####:   49:    printf("%s", "Player did not gain the card like they were meant to.\n");
 call    0 never executed
-        -:   48:}
-        -:   49:
-        1:   50:if (--G.supplyCount[choice2] == testG.supplyCount[choice2]) {
+        -:   50:}
+        -:   51:
+        1:   52:if (--G.supplyCount[choice2] == testG.supplyCount[choice2]) {
 branch  0 taken 1 (fallthrough)
 branch  1 taken 0
-        1:   51:    printf("%s", "supply count was correctly decremented from the gainCard function.\n");
+        1:   53:    printf("%s", "supply count was correctly decremented from the gainCard function.\n");
 call    0 returned 1
-        -:   52:}
-        -:   53:else
-        -:   54:{
-    #####:   55:    printf("%s", "supply count was not correctly decremented.\n");
+        -:   54:}
+        -:   55:else
+        -:   56:{
+    #####:   57:    printf("%s", "supply count was not correctly decremented.\n");
 call    0 never executed
-        -:   56:}
-        -:   57:
-        -:   58:
+        -:   58:}
         -:   59:
         -:   60:
-        1:   61:return 0;
+        -:   61:
         -:   62:
-        -:   63:}
+        1:   63:return 0;
+        -:   64:
+        -:   65:}

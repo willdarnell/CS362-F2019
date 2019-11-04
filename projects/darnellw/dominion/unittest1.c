@@ -9,6 +9,8 @@
 #define TESTCARD "mine"
 
 int main () {
+//inside of the dominion.c file, the first two conditionals, where I had inserted bugs are commented out because they
+//cause the program to exit the function and return. the first test for return number finds both of the bugs.
 
 //int mine(int choice1, int choice2, int choice3, struct gameState *state, int handPos, int *bonus, int j, int currentPlayer){
 int handpos = 0, choice1 = 0, choice2 = 0, choice3 = 0, bonus = 0, j = 0;
