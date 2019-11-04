@@ -705,7 +705,7 @@ int mine_function(int choice1, int choice2, int choice3, struct gameState *state
 
     gainCard(choice2, state, 2, currentPlayer);
 
-    //discard card from hand
+   // discard card from hand
     discardCard(handPos, currentPlayer, state, 0);
 
     //discard trashed card

@@ -20,8 +20,10 @@ int seed = 1000;
 int k[10] = {copper, gold, silver, minion, mine, cutpurse,
 			sea_hag, tribute, smithy, council_room};
 initializeGame(numPlayers, k, seed, &G);
-choice2 = 5;
+choice2 = 2;
 memcpy(&testG, &G, sizeof(struct gameState));
+printf("%s""%d", "THIS IS THE OPENING HAND COUNT: ", G.handCount[0]);
+printf("%s", "\n");
 
 printf("%s", "This is the test for the mine card\n");
 return_number = mine_function(choice1, choice2, choice3, &testG, handpos, bonus, j, 0);
@@ -32,9 +34,18 @@ if ((G.hand[0][0] == copper) && (getCost(G.hand[0][0]) + 3 <= getCost(choice2)))
     else{
         printf("%s", "the function failed when it shouldn't\n");
     }
+
 }
 
+//test gainCard on line 706
+//need to add in the discarded cards
 
+if (++G.handCount[0] == testG.handCount[0]){
+    printf("%s""%d", "Player gained a card as they were meant to.", G.handCount[0]);
+}
+else {
+    printf("%s""%d", "Player did not gain the card like they were meant to.\n", testG.handCount[0]);
+}
 
 
 
