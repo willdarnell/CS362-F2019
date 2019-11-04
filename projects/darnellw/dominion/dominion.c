@@ -686,15 +686,17 @@ int mine_function(int choice1, int choice2, int choice3, struct gameState *state
     int i;
     j = state->hand[currentPlayer][choice1];  //store card we will trash
 
-    if (state->hand[currentPlayer][choice1] > copper || state->hand[currentPlayer][choice1] < gold)
-    {
-        return -1;
-    }
+    //these need to be commented out because they are the bugs that cause the program to return early. they are
+    //found with the test case that checks return_number.
+    // if (state->hand[currentPlayer][choice1] > copper || state->hand[currentPlayer][choice1] < gold)
+    // {
+    //     return -1;
+    // }
 
-    if (choice2 > treasure_map && choice2 < curse)
-    {
-        return -1;
-    }
+    // if (choice2 > treasure_map && choice2 < curse)
+    // {
+    //     return -1;
+    // }
 
     if ( (getCost(state->hand[currentPlayer][choice1]) + 3) > getCost(choice2) )
     {
