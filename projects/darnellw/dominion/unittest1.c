@@ -38,9 +38,9 @@ if ((G.hand[0][0] == copper) && (getCost(G.hand[0][0]) + 3 <= getCost(choice2)))
 }
 
 //test gainCard on line 706
-//need to add in the discarded cards
+//player gains one card, but then discards two, so the final handcount for the player should be 4.
 
-if (++G.handCount[0] == testG.handCount[0]){
+if (--G.handCount[0] == testG.handCount[0]){
     printf("%s""%d", "Player gained a card as they were meant to.", G.handCount[0]);
 }
 else {

@@ -1,5 +1,6 @@
         -:    0:Source:unittest1.c
         -:    0:Programs:2
+        -:    0:Source is newer than graph
         -:    1:#include "dominion.h"
         -:    2:#include "dominion_helpers.h"
         -:    3:#include <string.h>
@@ -10,7 +11,7 @@
         -:    8:
         -:    9:#define TESTCARD "mine"
         -:   10:
-function main called 1 returned 100% blocks executed 92%
+function main called 1 returned 100% blocks executed 88%
         1:   11:int main () {
         -:   12:
         -:   13://int mine(int choice1, int choice2, int choice3, struct gameState *state, int handPos, int *bonus, int j, int currentPlayer){
@@ -24,37 +25,54 @@ function main called 1 returned 100% blocks executed 92%
         -:   21:			sea_hag, tribute, smithy, council_room};
         1:   22:initializeGame(numPlayers, k, seed, &G);
 call    0 returned 1
-        1:   23:choice2 = 5;
+        1:   23:choice2 = 2;
         1:   24:memcpy(&testG, &G, sizeof(struct gameState));
-        -:   25:
-        1:   26:printf("%s", "This is the test for the mine card\n");
+        1:   25:printf("%s""%d", "THIS IS THE OPENING HAND COUNT: ", G.handCount[0]);
 call    0 returned 1
-        1:   27:return_number = mine_function(choice1, choice2, choice3, &testG, handpos, bonus, j, 0);
+        1:   26:printf("%s", "\n");
 call    0 returned 1
-        1:   28:if ((G.hand[0][0] == copper) && (getCost(G.hand[0][0]) + 3 <= getCost(choice2))){
+        -:   27:
+        1:   28:printf("%s", "This is the test for the mine card\n");
+call    0 returned 1
+        1:   29:return_number = mine_function(choice1, choice2, choice3, &testG, handpos, bonus, j, 0);
+call    0 returned 1
+        1:   30:if ((G.hand[0][0] == copper) && (getCost(G.hand[0][0]) + 3 <= getCost(choice2))){
 branch  0 taken 1 (fallthrough)
 branch  1 taken 0
 call    2 returned 1
 call    3 returned 1
 branch  4 taken 1 (fallthrough)
 branch  5 taken 0
-        1:   29:    if (return_number == 0){
+        1:   31:    if (return_number == 0){
 branch  0 taken 1 (fallthrough)
 branch  1 taken 0
-        1:   30:        printf("%s", "the function executed when it should\n");
+        1:   32:        printf("%s", "the function executed when it should\n");
 call    0 returned 1
-        -:   31:    }
-        -:   32:    else{
-    #####:   33:        printf("%s", "the function failed when it shouldn't\n");
+        -:   33:    }
+        -:   34:    else{
+    #####:   35:        printf("%s", "the function failed when it shouldn't\n");
 call    0 never executed
-        -:   34:    }
-        -:   35:}
-        -:   36:
+        -:   36:    }
         -:   37:
-        -:   38:
+        -:   38:}
         -:   39:
-        -:   40:
-        -:   41:
-        1:   42:return 0;
-        -:   43:
-        -:   44:}
+        -:   40://test gainCard on line 706
+        -:   41://player gains one card, but then discards two, so the final handcount for the player should be 4.
+        -:   42:
+        1:   43:if (--G.handCount[0] == testG.handCount[0]){
+branch  0 taken 1 (fallthrough)
+branch  1 taken 0
+        1:   44:    printf("%s""%d", "Player gained a card as they were meant to.", G.handCount[0]);
+call    0 returned 1
+        -:   45:}
+        -:   46:else {
+    #####:   47:    printf("%s""%d", "Player did not gain the card like they were meant to.\n", testG.handCount[0]);
+call    0 never executed
+        -:   48:}
+        -:   49:
+        -:   50:
+        -:   51:
+        -:   52:
+        1:   53:return 0;
+        -:   54:
+        -:   55:}
