@@ -1,6 +1,5 @@
         -:    0:Source:dominion.c
         -:    0:Programs:2
-        -:    0:Source is newer than graph
         -:    1:#include "dominion.h"
         -:    2:#include "dominion_helpers.h"
         -:    3:#include "rngs.h"

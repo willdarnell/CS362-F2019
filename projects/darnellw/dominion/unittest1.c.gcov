@@ -1,6 +1,5 @@
         -:    0:Source:unittest1.c
         -:    0:Programs:2
-        -:    0:Source is newer than graph
         -:    1:#include "dominion.h"
         -:    2:#include "dominion_helpers.h"
         -:    3:#include <string.h>
@@ -11,7 +10,7 @@
         -:    8:
         -:    9:#define TESTCARD "mine"
         -:   10:
-function main called 1 returned 100% blocks executed 88%
+function main called 1 returned 100% blocks executed 85%
         1:   11:int main () {
         -:   12:
         -:   13://int mine(int choice1, int choice2, int choice3, struct gameState *state, int handPos, int *bonus, int j, int currentPlayer){
@@ -62,17 +61,29 @@ call    0 never executed
         1:   43:if (--G.handCount[0] == testG.handCount[0]){
 branch  0 taken 1 (fallthrough)
 branch  1 taken 0
-        1:   44:    printf("%s""%d", "Player gained a card as they were meant to.", G.handCount[0]);
+        1:   44:    printf("%s", "Player gained a card as they were meant to.\n");
 call    0 returned 1
         -:   45:}
         -:   46:else {
-    #####:   47:    printf("%s""%d", "Player did not gain the card like they were meant to.\n", testG.handCount[0]);
+    #####:   47:    printf("%s", "Player did not gain the card like they were meant to.\n");
 call    0 never executed
         -:   48:}
         -:   49:
-        -:   50:
-        -:   51:
-        -:   52:
-        1:   53:return 0;
-        -:   54:
-        -:   55:}
+        1:   50:if (--G.supplyCount[choice2] == testG.supplyCount[choice2]) {
+branch  0 taken 1 (fallthrough)
+branch  1 taken 0
+        1:   51:    printf("%s", "supply count was correctly decremented from the gainCard function.\n");
+call    0 returned 1
+        -:   52:}
+        -:   53:else
+        -:   54:{
+    #####:   55:    printf("%s", "supply count was not correctly decremented.\n");
+call    0 never executed
+        -:   56:}
+        -:   57:
+        -:   58:
+        -:   59:
+        -:   60:
+        1:   61:return 0;
+        -:   62:
+        -:   63:}
