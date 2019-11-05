@@ -420,9 +420,9 @@ call    0 never executed
     #####:  319:    return state->hand[currentPlayer][handPos];
         -:  320:}
         -:  321:
-function supplyCount called 3 returned 100% blocks executed 100%
-        3:  322:int supplyCount(int card, struct gameState *state) {
-        3:  323:    return state->supplyCount[card];
+function supplyCount called 0 returned 0% blocks executed 0%
+    #####:  322:int supplyCount(int card, struct gameState *state) {
+    #####:  323:    return state->supplyCount[card];
         -:  324:}
         -:  325:
 function fullDeckCount called 0 returned 0% blocks executed 0%
@@ -978,18 +978,18 @@ call    0 never executed
         -:  723:
         -:  724:}
         -:  725:
-function baron_function called 1 returned 100% blocks executed 31%
+function baron_function called 1 returned 100% blocks executed 23%
         1:  726:int baron_function(int currentPlayer, struct gameState *state, int choice1)
         -:  727:{
         1:  728:    state->numBuys++;//Increase buys by 1!
         1:  729:    if (choice1 > 0) { //Boolean true or going to discard an estate
-branch  0 taken 0 (fallthrough)
-branch  1 taken 1
-    #####:  730:        int p = 0;//Iterator for hand!
-    #####:  731:        int card_not_discarded = 0;//Flag for discard set!
-    #####:  732:        while(card_not_discarded) {
-branch  0 never executed
-branch  1 never executed
+branch  0 taken 1 (fallthrough)
+branch  1 taken 0
+        1:  730:        int p = 0;//Iterator for hand!
+        1:  731:        int card_not_discarded = 0;//Flag for discard set!
+        2:  732:        while(card_not_discarded) {
+branch  0 taken 0
+branch  1 taken 1 (fallthrough)
     #####:  733:            if (state->hand[currentPlayer][p] == estate) { //Found an estate card!
 branch  0 never executed
 branch  1 never executed
@@ -1038,18 +1038,18 @@ call    0 never executed
         -:  764:    }
         -:  765:
         -:  766:    else {
-        1:  767:        if (supplyCount(estate, state) > 0) {
-call    0 returned 1
-branch  1 taken 1 (fallthrough)
-branch  2 taken 0
-        1:  768:            gainCard(estate, state, 0, currentPlayer);//Gain an estate
-call    0 returned 1
+    #####:  767:        if (supplyCount(estate, state) > 0) {
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  768:            gainCard(estate, state, 0, currentPlayer);//Gain an estate
+call    0 never executed
         -:  769:
-        1:  770:            state->supplyCount[estate]--;//Decrement Estates
-        1:  771:            if (supplyCount(estate, state) == 0) {
-call    0 returned 1
-branch  1 taken 0 (fallthrough)
-branch  2 taken 1
+    #####:  770:            state->supplyCount[estate]--;//Decrement Estates
+    #####:  771:            if (supplyCount(estate, state) == 0) {
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
     #####:  772:                isGameOver(state);
 call    0 never executed
         -:  773:            }
@@ -1812,16 +1812,16 @@ branch  1 never executed
     #####: 1314:    return 0;
         -: 1315:}
         -: 1316:
-function gainCard called 1 returned 100% blocks executed 70%
-        1: 1317:int gainCard(int supplyPos, struct gameState *state, int toFlag, int player)
+function gainCard called 0 returned 0% blocks executed 0%
+    #####: 1317:int gainCard(int supplyPos, struct gameState *state, int toFlag, int player)
         -: 1318:{
         -: 1319:    //Note: supplyPos is enum of choosen card
         -: 1320:
         -: 1321:    //check if supply pile is empty (0) or card is not used in game (-1)
-        1: 1322:    if ( supplyCount(supplyPos, state) < 1 )
-call    0 returned 1
-branch  1 taken 0 (fallthrough)
-branch  2 taken 1
+    #####: 1322:    if ( supplyCount(supplyPos, state) < 1 )
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
         -: 1323:    {
     #####: 1324:        return -1;
         -: 1325:    }
@@ -1831,30 +1831,30 @@ branch  2 taken 1
         -: 1329:    // toFlag = 1 : add to deck
         -: 1330:    // toFlag = 2 : add to hand
         -: 1331:
-        1: 1332:    if (toFlag == 1)
-branch  0 taken 0 (fallthrough)
-branch  1 taken 1
+    #####: 1332:    if (toFlag == 1)
+branch  0 never executed
+branch  1 never executed
         -: 1333:    {
     #####: 1334:        state->deck[ player ][ state->deckCount[player] ] = supplyPos;
     #####: 1335:        state->deckCount[player]++;
         -: 1336:    }
-        1: 1337:    else if (toFlag == 2)
-branch  0 taken 0 (fallthrough)
-branch  1 taken 1
+    #####: 1337:    else if (toFlag == 2)
+branch  0 never executed
+branch  1 never executed
         -: 1338:    {
     #####: 1339:        state->hand[ player ][ state->handCount[player] ] = supplyPos;
     #####: 1340:        state->handCount[player]++;
         -: 1341:    }
         -: 1342:    else
         -: 1343:    {
-        1: 1344:        state->discard[player][ state->discardCount[player] ] = supplyPos;
-        1: 1345:        state->discardCount[player]++;
+    #####: 1344:        state->discard[player][ state->discardCount[player] ] = supplyPos;
+    #####: 1345:        state->discardCount[player]++;
         -: 1346:    }
         -: 1347:
         -: 1348:    //decrease number in supply pile
-        1: 1349:    state->supplyCount[supplyPos]--;
+    #####: 1349:    state->supplyCount[supplyPos]--;
         -: 1350:
-        1: 1351:    return 0;
+    #####: 1351:    return 0;
         -: 1352:}
         -: 1353:
 function updateCoins called 1 returned 100% blocks executed 82%

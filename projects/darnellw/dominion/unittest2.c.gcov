@@ -10,16 +10,16 @@
         -:    8:
         -:    9:#define TESTCARD "baron"
         -:   10://int baron_function(int currentPlayer, struct gameState *state, int choice1)
-function main called 1 returned 100% blocks executed 100%
+function main called 1 returned 100% blocks executed 83%
         1:   11:int main () {
         -:   12:
-        1:   13:int choice1 = 0;
+        1:   13:int choice1 = 1;
         1:   14:int currentPlayer = 0;
         -:   15://setting up the test case taken from the example
         -:   16:struct gameState G, testG;
         1:   17:int numPlayers = 2;
         1:   18:int seed = 1000;
-        1:   19:int k[10] = {copper, gold, silver, minion, mine, cutpurse,
+        1:   19:int k[10] = {estate, gold, silver, minion, mine, cutpurse,
         -:   20:			sea_hag, tribute, smithy, council_room};
         1:   21:initializeGame(numPlayers, k, seed, &G);
 call    0 returned 1
@@ -30,5 +30,31 @@ call    0 returned 1
         1:   25:baron_function(currentPlayer, &testG, choice1);
 call    0 returned 1
         -:   26:
-        1:   27:return 0;
-        -:   28:}
+        -:   27://test for number of buys increasing by one
+        -:   28:
+        1:   29:if (testG.numBuys == ++G.numBuys){
+branch  0 taken 1 (fallthrough)
+branch  1 taken 0
+        1:   30:    printf("%s", "the number of buys was incremented correctly.\n");
+call    0 returned 1
+        -:   31:}
+        -:   32:else {
+    #####:   33:     printf("%s", "the number of buys was NOT incremented correctly.\n");
+call    0 never executed
+        -:   34:}
+        -:   35:
+        1:   36:if ((testG.coins == G.coins) && (testG.supplyCount[estate] == G.supplyCount[estate])){
+branch  0 taken 1 (fallthrough)
+branch  1 taken 0
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0
+        1:   37:     printf("%s", "the function is not working properly and did not execute.");
+call    0 returned 1
+        -:   38:}
+        -:   39:else {
+    #####:   40:     printf("%s", "at least one branch of the function ran correctly.");
+call    0 never executed
+        -:   41:}
+        -:   42:
+        1:   43:return 0;
+        -:   44:}
