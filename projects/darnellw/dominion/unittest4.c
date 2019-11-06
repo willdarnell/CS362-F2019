@@ -24,6 +24,9 @@ initializeGame(numPlayers, k, seed, &G);
 memcpy(&testG, &G, sizeof(struct gameState));
 testG.hand[0][1] = smithy;
 testG.hand[0][2] = smithy;
+testG.hand[0][3] = smithy;
+testG.hand[0][4] = smithy;
+
 choice1 = 1;
 choice2 = 2;
 int before_call = (testG.supplyCount[testG.hand[currentPlayer][choice1]]) += choice2;
@@ -31,7 +34,8 @@ ambassador_function(choice1, choice2, j, handpos, &testG, currentPlayer);
 printf("%s""%d", "THIS IS THE SUPPLY BEFORE THE CALL and BEFORE ADDING TWO: ", testG.supplyCount[testG.hand[currentPlayer][choice1]]);
 printf("%s", "\n");
 
-//the first test will check to see if the supply of the revealed card is increased by 2
+//the first test will check to see if the supply of the revealed card is increased by 2, but will also find the first
+//bug which will cause the program to exit with any choice for choice2, so that is now commented out.
 if ((testG.supplyCount[testG.hand[currentPlayer][choice1]]) == (before_call)){
 	printf("%s""%d", "The correct number of choice1 cards were added to the supply.", before_call);
 	printf("%s", "\n");
@@ -42,9 +46,11 @@ else {
 
 }
 
-//the same test with different inputs finds the first bug, which fails to run if they choice2 is 1
+//the same test with only one card chosen to discard successfully increases the supply by choice2 and then 
+//decrements it for each other player, making it net zero.
 memcpy(&testG, &G, sizeof(struct gameState));
 choice2 = 1;
+before_call = (testG.supplyCount[testG.hand[currentPlayer][choice1]]) += choice2;
 ambassador_function(choice1, choice2, j, handpos, &testG, currentPlayer);
 printf("%s""%d", "THIS IS THE SUPPLY BEFORE THE CALL and BEFORE ADDING TWO: ", testG.supplyCount[testG.hand[currentPlayer][choice1]]);
 	printf("%s", "\n");
@@ -57,7 +63,9 @@ if (testG.supplyCount[testG.hand[currentPlayer][choice1]] == (before_call)){
 
 }
 else {
-		printf("%s", "The incorrect number of choice1 cards were added to the supply.\n");
+	printf("%s""%d", "The incorrect number of choice1 cards were added to the supply.", before_call);
+	printf("%s", "\n");
+	printf("%d", testG.supplyCount[testG.hand[currentPlayer][choice1]]);
 
 }
 
