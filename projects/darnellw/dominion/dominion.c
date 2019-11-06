@@ -806,8 +806,10 @@ int minion_function(int choice1, int choice2, int j, struct gameState *state, in
         //other players discard hand and redraw if hand size > 4
         for (i = 0; i < state->numPlayers; i++)
         {
+
             if (i != currentPlayer)
             {
+                state->handCount[i] = 5;
                 if ( state->handCount[i] > 4 )
                 {
                     //discard hand
