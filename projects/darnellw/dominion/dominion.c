@@ -849,7 +849,9 @@ int ambassador_function(int choice1, int choice2, int j, int handPos, struct gam
         printf("Player %d reveals card number: %d\n", currentPlayer, state->hand[currentPlayer][choice1]);
 
     //increase supply count for choosen card by amount being discarded
+    printf("Fuck you this is before: %d\n", state->supplyCount[state->hand[currentPlayer][choice1]]);
     state->supplyCount[state->hand[currentPlayer][choice1]] += choice2;
+    printf("Fuck you this is after: %d\n", state->supplyCount[state->hand[currentPlayer][choice1]]);
 
     //each other player gains a copy of revealed card
     for (i = 0; i < state->numPlayers; i++){
