@@ -69,5 +69,16 @@ else {
 
 }
 
+//this test finds the second bug that was added, which skips the for loop before it gets to the card that is meant
+//to be trashed because of an indexing error.
+if (testG.hand[currentPlayer][1] == -1){
+	printf("%s", "The player successfully discarded the card that they added to the supply pile.\n");
+}
+else {
+	printf("%s", "The player did not successfully discard the card that they added to the supply pile.\n");
+
+}
+
+
 return 0;
 }
