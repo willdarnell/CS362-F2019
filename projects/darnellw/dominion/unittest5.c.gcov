@@ -10,7 +10,7 @@
         -:    8:
         -:    9:
         -:   10://this is the unit test for the ambassador function
-function main called 1 returned 100% blocks executed 85%
+function main called 1 returned 100% blocks executed 86%
         1:   11:int main () {
         -:   12://int tribute(int currentPlayer, int nextPlayer, int tributeRevealedCards, struct gameState *state){
         1:   13:printf("%s", "This is the test for the tribute card\n");
@@ -71,6 +71,10 @@ call    0 never executed
 call    0 returned 1
         -:   56:
         -:   57:}
-        -:   58:
-        1:   59:return 0;
-        -:   60:}
+        1:   58:testk.deckCount[1] = 0;
+        1:   59:tribute_function(currentPlayer, nextPlayer, tributeRevealedCards, &testk);
+call    0 returned 1
+        -:   60:
+        -:   61:
+        1:   62:return 0;
+        -:   63:}

@@ -1211,24 +1211,24 @@ call    0 never executed
     #####:  876:    return 0;
         -:  877:}
         -:  878:
-function tribute_function called 2 returned 100% blocks executed 60%
-        2:  879:int tribute_function(int currentPlayer, int nextPlayer, int* tributeRevealedCards, struct gameState *state){
+function tribute_function called 3 returned 100% blocks executed 70%
+        3:  879:int tribute_function(int currentPlayer, int nextPlayer, int* tributeRevealedCards, struct gameState *state){
         -:  880:    int i;
-        2:  881:    if ((state->discardCount[nextPlayer] + state->deckCount[nextPlayer]) <= 1) {
-branch  0 taken 0 (fallthrough)
+        3:  881:    if ((state->discardCount[nextPlayer] + state->deckCount[nextPlayer]) <= 1) {
+branch  0 taken 1 (fallthrough)
 branch  1 taken 2
-    #####:  882:        if (state->deckCount[nextPlayer] > 0) {
-branch  0 never executed
-branch  1 never executed
+        1:  882:        if (state->deckCount[nextPlayer] > 0) {
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
     #####:  883:            tributeRevealedCards[0] = state->deck[nextPlayer][state->deckCount[nextPlayer]-1];
     #####:  884:            state->deckCount[nextPlayer]--;
     #####:  885:                            printf("first branch\n");
 call    0 never executed
         -:  886:
         -:  887:        }
-    #####:  888:        else if (state->discardCount[nextPlayer] > 0) {
-branch  0 never executed
-branch  1 never executed
+        1:  888:        else if (state->discardCount[nextPlayer] > 0) {
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
     #####:  889:            tributeRevealedCards[0] = state->discard[nextPlayer][state->discardCount[nextPlayer]-1];
     #####:  890:            state->discardCount[nextPlayer]--;
     #####:  891:            printf("second branch\n");
@@ -1271,21 +1271,21 @@ call    0 never executed
         2:  922:            state->deckCount[nextPlayer]--;
         -:  923:        }
         -:  924:
-        2:  925:        if (tributeRevealedCards[0] = tributeRevealedCards[1]) { 
-branch  0 taken 2 (fallthrough)
+        3:  925:        if (tributeRevealedCards[0] = tributeRevealedCards[1]) { 
+branch  0 taken 3 (fallthrough)
 branch  1 taken 0
         -:  926:
         -:  927:            //If we have a duplicate card, just drop one
-        2:  928:            state->playedCards[state->playedCardCount] = tributeRevealedCards[1];
-        2:  929:            state->playedCardCount++;
-        2:  930:            tributeRevealedCards[1] = -1;
+        3:  928:            state->playedCards[state->playedCardCount] = tributeRevealedCards[1];
+        3:  929:            state->playedCardCount++;
+        3:  930:            tributeRevealedCards[1] = -1;
         -:  931:        }
         -:  932:
-        8:  933:        for (i = 0; i <= 2; i++) {
-branch  0 taken 6
-branch  1 taken 2 (fallthrough)
-        6:  934:            if (tributeRevealedCards[i] = copper || tributeRevealedCards[i] == silver || tributeRevealedCards[i] == gold) { //Treasure cards
-        6:  935:                state->coins += 2;
+       12:  933:        for (i = 0; i <= 2; i++) {
+branch  0 taken 9
+branch  1 taken 3 (fallthrough)
+        9:  934:            if (tributeRevealedCards[i] = copper || tributeRevealedCards[i] == silver || tributeRevealedCards[i] == gold) { //Treasure cards
+        9:  935:                state->coins += 2;
         -:  936:            }
         -:  937:
         -:  938:            else if (tributeRevealedCards[i] == estate || tributeRevealedCards[i] == duchy || tributeRevealedCards[i] == province || tributeRevealedCards[i] == gardens || tributeRevealedCards[i] == great_hall) { //Victory Card Found
@@ -1297,7 +1297,7 @@ branch  1 taken 2 (fallthrough)
         -:  944:            }
         -:  945:        }
         -:  946:
-        2:  947:        return 0;
+        3:  947:        return 0;
         -:  948:}
 function cardEffect called 0 returned 0% blocks executed 0%
     #####:  949:int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState *state, int handPos, int *bonus)

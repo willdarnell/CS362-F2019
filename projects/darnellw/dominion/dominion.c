@@ -901,8 +901,9 @@ int tribute_function(int currentPlayer, int nextPlayer, int* tributeRevealedCard
         else {
 
             if (state->deckCount[nextPlayer] == 0) {
-                for (i = 0; i < state->discardCount[nextPlayer]; i++) {
 
+                for (i = 0; i < state->discardCount[nextPlayer]; i++) {
+                    printf("%s""%d", "This is the discard count: ", state->discardCount[nextPlayer] );
                     state->deck[nextPlayer][i] = state->discard[nextPlayer][i];//Move to deck
                     state->deckCount[nextPlayer]++;
                     state->discard[nextPlayer][i] = -1;

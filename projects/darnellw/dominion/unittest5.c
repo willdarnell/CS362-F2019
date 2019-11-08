@@ -55,6 +55,11 @@ else {
     printf("%s""%d", "The tribute function is not correctly assigning tribute revealed cards.\n"), tributeRevealedCards[1];
 
 }
+initializeGame(numPlayers, k, seed, &G);
+memcpy(&testk, &G, sizeof(struct gameState));
+testk.deckCount[1] = 0;
+tribute_function(currentPlayer, nextPlayer, tributeRevealedCards, &testk);
+
 
 return 0;
 }
