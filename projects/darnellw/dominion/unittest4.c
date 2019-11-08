@@ -10,6 +10,7 @@
 //this is the unit test for the ambassador function
 int main () {
 //int ambassador_function(int choice1, int choice2, int j, int handPos, struct gameState *state, int currentPlayer){
+printf("%s", "This is the test for the ambassador card\n");
 
 int handpos = 0, choice1 = 0, choice2 = 0, choice3 = 0, bonus = 0, j = 0;
 

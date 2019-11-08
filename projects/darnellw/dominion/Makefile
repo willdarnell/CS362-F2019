@@ -13,16 +13,27 @@ playdom: dominion.o playdom.c
 testDrawCard: testDrawCard.c dominion.o rngs.o
 	gcc  -o testDrawCard -g  testDrawCard.c dominion.o rngs.o $(CFLAGS)
 
-cardtest1:	unittest1.c dominion.o rngs.o
-	gcc -o -fprofile-arcs -ftest-coverage cardtest1 -g unittest1.c dominion.o rngs.o $(CFLAGS)
+cardtest1:	
+	gcc -fprofile-arcs -ftest-coverage -o cardtest1 -g unittest1.c dominion.c rngs.c 
 
 interface.o: interface.h interface.c
 	gcc -c interface.c -g  $(CFLAGS)
 
-runtests: unittest1
-	./unittest1 &> unittestresult.out
-	gcov dominion.c >> unittestresult.out
-	cat dominion.c.gcov >> unittestresult.out
+unittestresults: 
+	gcc -fprofile-arcs -ftest-coverage -o testcard1 -g unittest1.c dominion.c rngs.c 
+	./testcard1 &> unittestresult.out
+	gcov -f -b dominion.c >> unittestresult.out
+	gcc -fprofile-arcs -ftest-coverage -o testcard2 -g unittest2.c dominion.c rngs.c 
+	./testcard2 >> unittestresult.out
+	gcov -f -b dominion.c >> unittestresult.out
+	gcc -fprofile-arcs -ftest-coverage -o testcard3 -g unittest3.c dominion.c rngs.c 
+	./testcard3 >> unittestresult.out
+	gcov -f -b dominion.c >> unittestresult.out
+	gcc -fprofile-arcs -ftest-coverage -o testcard4 -g unittest4.c dominion.c rngs.c 
+	./testcard4 >> unittestresult.out
+	gcov -f -b dominion.c >> unittestresult.out
+	
+	
 
 
 player: player.c interface.o

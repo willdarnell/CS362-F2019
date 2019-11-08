@@ -843,7 +843,7 @@ int ambassador_function(int choice1, int choice2, int j, int handPos, struct gam
             j++;
         }
     }
-    if (j < choice2) { printf("%s", "GODDAMN IDIOT2.");  return -1; }
+    if (j < choice2) {  return -1; }
 
     if (DEBUG)
         printf("Player %d reveals card number: %d\n", currentPlayer, state->hand[currentPlayer][choice1]);
