@@ -55,11 +55,54 @@ else {
     printf("%s""%d", "The tribute function is not correctly assigning tribute revealed cards.\n"), tributeRevealedCards[1];
 
 }
+
+//this test initializes the deckcount of the nextplayer with only one card.
 initializeGame(numPlayers, k, seed, &G);
 memcpy(&testk, &G, sizeof(struct gameState));
+testk.discardCount[1]=0;
+testk.deckCount[1] = 1;
+tribute_function(currentPlayer, nextPlayer, tributeRevealedCards, &testk);
+
+if (testk.deckCount[1] == 0){
+        printf("%s", "The tribute funciton is working correctly for a one card deck.\n");
+
+}
+else {
+            printf("%s", "The tribute funciton is  not working correctly.\n");
+
+}
+
+//this test reverses the previous test and checks the discard pile
+initializeGame(numPlayers, k, seed, &G);
+memcpy(&testk, &G, sizeof(struct gameState));
+testk.discardCount[1]=1;
 testk.deckCount[1] = 0;
 tribute_function(currentPlayer, nextPlayer, tributeRevealedCards, &testk);
 
+if (testk.discardCount[1] == 0){
+        printf("%s", "The tribute funciton is working correctly for a no card deck.\n");
+
+}
+else {
+            printf("%s", "The tribute funciton is  not working correctly.\n");
+
+}
+
+//this test reverses the previous test and checks the discard pile
+initializeGame(numPlayers, k, seed, &G);
+memcpy(&testk, &G, sizeof(struct gameState));
+testk.discardCount[1]=10;
+testk.deckCount[1] = 0;
+tribute_function(currentPlayer, nextPlayer, tributeRevealedCards, &testk);
+
+if (testk.discardCount[1] == 5){
+        printf("%s", "The tribute funciton is working correctly for a no card deck with a large discard pile.\n");
+
+}
+else {
+            printf("%s""%d", "The tribute funciton is not working correctly.\n", testk.discardCount[1]);
+
+}
 
 return 0;
 }

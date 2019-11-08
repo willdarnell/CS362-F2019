@@ -32,6 +32,9 @@ unittestresults:
 	gcc -fprofile-arcs -ftest-coverage -o testcard4 -g unittest4.c dominion.c rngs.c 
 	./testcard4 >> unittestresult.out
 	gcov -f -b dominion.c >> unittestresult.out
+	gcc -fprofile-arcs -ftest-coverage -o testcard5 -g unittest5.c dominion.c rngs.c 
+	./testcard5 >> unittestresult.out
+	gcov -f -b dominion.c >> unittestresult.out
 	
 	
 

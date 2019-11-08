@@ -10,7 +10,7 @@
         -:    8:
         -:    9:
         -:   10://this is the unit test for the ambassador function
-function main called 1 returned 100% blocks executed 86%
+function main called 1 returned 100% blocks executed 82%
         1:   11:int main () {
         -:   12://int tribute(int currentPlayer, int nextPlayer, int tributeRevealedCards, struct gameState *state){
         1:   13:printf("%s", "This is the test for the tribute card\n");
@@ -71,10 +71,72 @@ call    0 never executed
 call    0 returned 1
         -:   56:
         -:   57:}
-        1:   58:testk.deckCount[1] = 0;
-        1:   59:tribute_function(currentPlayer, nextPlayer, tributeRevealedCards, &testk);
+        -:   58:
+        -:   59://this test initializes the deckcount of the nextplayer with only one card.
+        1:   60:initializeGame(numPlayers, k, seed, &G);
 call    0 returned 1
-        -:   60:
-        -:   61:
-        1:   62:return 0;
-        -:   63:}
+        1:   61:memcpy(&testk, &G, sizeof(struct gameState));
+        1:   62:testk.discardCount[1]=0;
+        1:   63:testk.deckCount[1] = 1;
+        1:   64:tribute_function(currentPlayer, nextPlayer, tributeRevealedCards, &testk);
+call    0 returned 1
+        -:   65:
+        1:   66:if (testk.deckCount[1] == 0){
+branch  0 taken 1 (fallthrough)
+branch  1 taken 0
+        1:   67:        printf("%s", "The tribute funciton is working correctly for a one card deck.\n");
+call    0 returned 1
+        -:   68:
+        -:   69:}
+        -:   70:else {
+    #####:   71:            printf("%s", "The tribute funciton is  not working correctly.\n");
+call    0 never executed
+        -:   72:
+        -:   73:}
+        -:   74:
+        -:   75://this test reverses the previous test and checks the discard pile
+        1:   76:initializeGame(numPlayers, k, seed, &G);
+call    0 returned 1
+        1:   77:memcpy(&testk, &G, sizeof(struct gameState));
+        1:   78:testk.discardCount[1]=1;
+        1:   79:testk.deckCount[1] = 0;
+        1:   80:tribute_function(currentPlayer, nextPlayer, tributeRevealedCards, &testk);
+call    0 returned 1
+        -:   81:
+        1:   82:if (testk.discardCount[1] == 0){
+branch  0 taken 1 (fallthrough)
+branch  1 taken 0
+        1:   83:        printf("%s", "The tribute funciton is working correctly for a no card deck.\n");
+call    0 returned 1
+        -:   84:
+        -:   85:}
+        -:   86:else {
+    #####:   87:            printf("%s", "The tribute funciton is  not working correctly.\n");
+call    0 never executed
+        -:   88:
+        -:   89:}
+        -:   90:
+        -:   91://this test reverses the previous test and checks the discard pile
+        1:   92:initializeGame(numPlayers, k, seed, &G);
+call    0 returned 1
+        1:   93:memcpy(&testk, &G, sizeof(struct gameState));
+        1:   94:testk.discardCount[1]=10;
+        1:   95:testk.deckCount[1] = 0;
+        1:   96:tribute_function(currentPlayer, nextPlayer, tributeRevealedCards, &testk);
+call    0 returned 1
+        -:   97:
+        1:   98:if (testk.discardCount[1] == 5){
+branch  0 taken 1 (fallthrough)
+branch  1 taken 0
+        1:   99:        printf("%s", "The tribute funciton is working correctly for a no card deck with a large discard pile.\n");
+call    0 returned 1
+        -:  100:
+        -:  101:}
+        -:  102:else {
+    #####:  103:            printf("%s""%d", "The tribute funciton is not working correctly.\n", testk.discardCount[1]);
+call    0 never executed
+        -:  104:
+        -:  105:}
+        -:  106:
+        1:  107:return 0;
+        -:  108:}

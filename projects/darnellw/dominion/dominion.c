@@ -859,10 +859,8 @@ int ambassador_function(int choice1, int choice2, int j, int handPos, struct gam
             gainCard(state->hand[currentPlayer][choice1], state, 0, i);
         }
     }
-
     //discard played card from hand
     discardCard(handPos, currentPlayer, state, 0);
-
     //trash copies of cards returned to supply
     for (j = 0; j < choice2; j++){
         for (i = 0; i < state->handCount[currentPlayer]; j++){
@@ -878,20 +876,18 @@ int ambassador_function(int choice1, int choice2, int j, int handPos, struct gam
 
 int tribute_function(int currentPlayer, int nextPlayer, int* tributeRevealedCards, struct gameState *state){
     int i;
+
     if ((state->discardCount[nextPlayer] + state->deckCount[nextPlayer]) <= 1) {
         if (state->deckCount[nextPlayer] > 0) {
             tributeRevealedCards[0] = state->deck[nextPlayer][state->deckCount[nextPlayer]-1];
             state->deckCount[nextPlayer]--;
-                            printf("first branch\n");
 
         }
         else if (state->discardCount[nextPlayer] > 0) {
             tributeRevealedCards[0] = state->discard[nextPlayer][state->discardCount[nextPlayer]-1];
             state->discardCount[nextPlayer]--;
-            printf("second branch\n");
         }
         else {
-            //No Card to Reveal
             if (DEBUG) {
                 printf("No cards to reveal\n");
             }
@@ -903,7 +899,6 @@ int tribute_function(int currentPlayer, int nextPlayer, int* tributeRevealedCard
             if (state->deckCount[nextPlayer] == 0) {
 
                 for (i = 0; i < state->discardCount[nextPlayer]; i++) {
-                    printf("%s""%d", "This is the discard count: ", state->discardCount[nextPlayer] );
                     state->deck[nextPlayer][i] = state->discard[nextPlayer][i];//Move to deck
                     state->deckCount[nextPlayer]++;
                     state->discard[nextPlayer][i] = -1;
