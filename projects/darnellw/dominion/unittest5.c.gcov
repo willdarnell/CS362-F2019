@@ -1,6 +1,5 @@
         -:    0:Source:unittest5.c
         -:    0:Programs:2
-        -:    0:Source is newer than graph
         -:    1:#include "dominion.h"
         -:    2:#include "dominion_helpers.h"
         -:    3:#include <string.h>
@@ -11,7 +10,7 @@
         -:    8:
         -:    9:
         -:   10://this is the unit test for the ambassador function
-function main called 1 returned 100% blocks executed 88%
+function main called 1 returned 100% blocks executed 85%
         1:   11:int main () {
         -:   12://int tribute(int currentPlayer, int nextPlayer, int tributeRevealedCards, struct gameState *state){
         1:   13:printf("%s", "This is the test for the tribute card\n");
@@ -22,7 +21,7 @@ call    0 returned 1
         1:   17:int nextPlayer = 1;
         -:   18:int tributeRevealedCards[2];
         -:   19://setting up the test case taken from the example
-        -:   20:struct gameState G, testG;
+        -:   20:struct gameState G, testG, testk;
         1:   21:int numPlayers = 2;
         1:   22:int seed = 1000;
         1:   23:int k[10] = {ambassador, gold, silver, minion, mine, cutpurse,
@@ -38,18 +37,40 @@ call    0 returned 1
 call    0 returned 1
         -:   32:
         -:   33://first test to find the first bug, which is an assignment bug, finding it requires commenting out a later for loop 
-        1:   34://that has the second bug.
-branch  0 taken 1 (fallthrough)
-branch  1 taken 0
+        -:   34://that has the second bug.
         1:   35:if (tributeRevealedCards[1] == -1){
-call    0 returned 1
-        -:   36:    printf("%s", "There is a bug in the tribute logic.\n");
-        -:   37:}
-    #####:   38:else {
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+    #####:   36:    printf("%s", "There is a bug in the tribute logic.\n");
 call    0 never executed
-        -:   39:    printf("%s""%d", "The check to see if the cards are the same that are revealed works.\n"), tributeRevealedCards[0];
+        -:   37:}
+        -:   38:else {
+        1:   39:    printf("%s""%d", "The check to see if the cards are the same that are revealed works.\n"), tributeRevealedCards[0];
+call    0 returned 1
         -:   40:
         -:   41:}
-        1:   42:
-        -:   43:return 0;
-        -:   44:}
+        1:   42:initializeGame(numPlayers, k, seed, &G);
+call    0 returned 1
+        1:   43:memcpy(&testk, &G, sizeof(struct gameState));
+        1:   44:testk.deck[1][5] = smithy;
+        1:   45:testk.deck[1][6] = mine;
+        1:   46:testk.deck[1][7] = mine;
+        1:   47:testk.deck[1][8] = smithy;
+        1:   48:tribute_function(currentPlayer, nextPlayer, tributeRevealedCards, &testk);
+call    0 returned 1
+        -:   49://second test checks to see if the second revealed card equals smithy like it is supposed to. this finds
+        -:   50://the second assignment bug which is setting it to copper instead of checking for copper.
+        1:   51:if (tributeRevealedCards[1] == 13){
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+    #####:   52:    printf("%s", "The tribute funciton is working correctly.\n");
+call    0 never executed
+        -:   53:}
+        -:   54:else {
+        1:   55:    printf("%s""%d", "The tribute function is not correctly assigning tribute revealed cards.\n"), tributeRevealedCards[1];
+call    0 returned 1
+        -:   56:
+        -:   57:}
+        -:   58:
+        1:   59:return 0;
+        -:   60:}

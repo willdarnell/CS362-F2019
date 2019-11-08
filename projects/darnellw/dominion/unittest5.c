@@ -17,7 +17,7 @@ int currentPlayer = 0;
 int nextPlayer = 1;
 int tributeRevealedCards[2];
 //setting up the test case taken from the example
-struct gameState G, testG;
+struct gameState G, testG, testk;
 int numPlayers = 2;
 int seed = 1000;
 int k[10] = {ambassador, gold, silver, minion, mine, cutpurse,
@@ -37,6 +37,22 @@ if (tributeRevealedCards[1] == -1){
 }
 else {
     printf("%s""%d", "The check to see if the cards are the same that are revealed works.\n"), tributeRevealedCards[0];
+
+}
+initializeGame(numPlayers, k, seed, &G);
+memcpy(&testk, &G, sizeof(struct gameState));
+testk.deck[1][5] = smithy;
+testk.deck[1][6] = mine;
+testk.deck[1][7] = mine;
+testk.deck[1][8] = smithy;
+tribute_function(currentPlayer, nextPlayer, tributeRevealedCards, &testk);
+//second test checks to see if the second revealed card equals smithy like it is supposed to. this finds
+//the second assignment bug which is setting it to copper instead of checking for copper.
+if (tributeRevealedCards[1] == 13){
+    printf("%s", "The tribute funciton is working correctly.\n");
+}
+else {
+    printf("%s""%d", "The tribute function is not correctly assigning tribute revealed cards.\n"), tributeRevealedCards[1];
 
 }
 
