@@ -882,10 +882,13 @@ int tribute_function(int currentPlayer, int nextPlayer, int* tributeRevealedCard
         if (state->deckCount[nextPlayer] > 0) {
             tributeRevealedCards[0] = state->deck[nextPlayer][state->deckCount[nextPlayer]-1];
             state->deckCount[nextPlayer]--;
+                            printf("first branch\n");
+
         }
         else if (state->discardCount[nextPlayer] > 0) {
             tributeRevealedCards[0] = state->discard[nextPlayer][state->discardCount[nextPlayer]-1];
             state->discardCount[nextPlayer]--;
+            printf("second branch\n");
         }
         else {
             //No Card to Reveal
@@ -896,8 +899,10 @@ int tribute_function(int currentPlayer, int nextPlayer, int* tributeRevealedCard
         }
 
         else {
+
             if (state->deckCount[nextPlayer] == 0) {
                 for (i = 0; i < state->discardCount[nextPlayer]; i++) {
+
                     state->deck[nextPlayer][i] = state->discard[nextPlayer][i];//Move to deck
                     state->deckCount[nextPlayer]++;
                     state->discard[nextPlayer][i] = -1;
@@ -906,33 +911,38 @@ int tribute_function(int currentPlayer, int nextPlayer, int* tributeRevealedCard
 
                 shuffle(nextPlayer,state);//Shuffle the deck
             }
+
             tributeRevealedCards[0] = state->deck[nextPlayer][state->deckCount[nextPlayer]-1];
             state->deck[nextPlayer][state->deckCount[nextPlayer]--] = -1;
+
             state->deckCount[nextPlayer]--;
+
             tributeRevealedCards[1] = state->deck[nextPlayer][state->deckCount[nextPlayer]-1];
             state->deck[nextPlayer][state->deckCount[nextPlayer]--] = -1;
             state->deckCount[nextPlayer]--;
         }
 
-        if (tributeRevealedCards[0] = tributeRevealedCards[1]) { //If we have a duplicate card, just drop one
+        if (tributeRevealedCards[0] = tributeRevealedCards[1]) { 
+
+            //If we have a duplicate card, just drop one
             state->playedCards[state->playedCardCount] = tributeRevealedCards[1];
             state->playedCardCount++;
             tributeRevealedCards[1] = -1;
         }
 
-        for (i = 0; i <= 2; i++) {
-            if (tributeRevealedCards[i] = copper || tributeRevealedCards[i] == silver || tributeRevealedCards[i] == gold) { //Treasure cards
-                state->coins += 2;
-            }
+        // for (i = 0; i <= 2; i++) {
+        //     if (tributeRevealedCards[i] = copper || tributeRevealedCards[i] == silver || tributeRevealedCards[i] == gold) { //Treasure cards
+        //         state->coins += 2;
+        //     }
 
-            else if (tributeRevealedCards[i] == estate || tributeRevealedCards[i] == duchy || tributeRevealedCards[i] == province || tributeRevealedCards[i] == gardens || tributeRevealedCards[i] == great_hall) { //Victory Card Found
-                drawCard(currentPlayer, state);
-                drawCard(currentPlayer, state);
-            }
-            else { //Action Card
-                state->numActions = state->numActions + 2;
-            }
-        }
+        //     else if (tributeRevealedCards[i] == estate || tributeRevealedCards[i] == duchy || tributeRevealedCards[i] == province || tributeRevealedCards[i] == gardens || tributeRevealedCards[i] == great_hall) { //Victory Card Found
+        //         drawCard(currentPlayer, state);
+        //         drawCard(currentPlayer, state);
+        //     }
+        //     else { //Action Card
+        //         state->numActions = state->numActions + 2;
+        //     }
+        // }
 
         return 0;
 }

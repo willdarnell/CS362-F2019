@@ -1,0 +1,115 @@
+        -:    0:Source:unittest4.c
+        -:    0:Programs:1
+        -:    0:Source is newer than graph
+        -:    1:#include "dominion.h"
+        -:    2:#include "dominion_helpers.h"
+        -:    3:#include <string.h>
+        -:    4:#include <stdio.h>
+        -:    5:#include <assert.h>
+        -:    6:#include "rngs.h"
+        -:    7:#include <stdlib.h>
+        -:    8:
+        -:    9:
+        -:   10://this is the unit test for the ambassador function
+function main called 1 returned 100% blocks executed 80%
+        1:   11:int main () {
+        -:   12://int ambassador_function(int choice1, int choice2, int j, int handPos, struct gameState *state, int currentPlayer){
+        -:   13:printf("%s", "This is the test for the ambassador card\n");
+        1:   14:
+        -:   15:int handpos = 0, choice1 = 0, choice2 = 0, choice3 = 0, bonus = 0, j = 0;
+        1:   16:
+        -:   17:int currentPlayer = 0;
+        -:   18://setting up the test case taken from the example
+        1:   19:struct gameState G, testG;
+        1:   20:int numPlayers = 2;
+        1:   21:int seed = 1000;
+        -:   22:int k[10] = {ambassador, gold, silver, minion, mine, cutpurse,
+        1:   23:			sea_hag, tribute, smithy, council_room};
+call    0 returned 1
+        1:   24:initializeGame(numPlayers, k, seed, &G);
+        1:   25:memcpy(&testG, &G, sizeof(struct gameState));
+        1:   26:testG.hand[0][1] = smithy;
+        1:   27:testG.hand[0][2] = smithy;
+        1:   28:testG.hand[0][3] = smithy;
+        -:   29:testG.hand[0][4] = smithy;
+        1:   30:
+        1:   31:choice1 = 1;
+        1:   32:choice2 = 2;
+        1:   33:int before_call = (testG.supplyCount[testG.hand[currentPlayer][choice1]]) += choice2;
+call    0 returned 1
+        1:   34:ambassador_function(choice1, choice2, j, handpos, &testG, currentPlayer);
+call    0 returned 1
+        1:   35:printf("%s""%d", "THIS IS THE SUPPLY BEFORE THE CALL and BEFORE ADDING TWO: ", testG.supplyCount[testG.hand[currentPlayer][choice1]]);
+call    0 returned 1
+        -:   36:printf("%s", "\n");
+        -:   37:
+        -:   38://the first test will check to see if the supply of the revealed card is increased by 2, but will also find the first
+        1:   39://bug which will cause the program to exit with any choice for choice2, so that is now commented out.
+branch  0 taken 1 (fallthrough)
+branch  1 taken 0
+        1:   40:if ((testG.supplyCount[testG.hand[currentPlayer][choice1]]) == (before_call)){
+call    0 returned 1
+        1:   41:	printf("%s""%d", "The correct number of choice1 cards were added to the supply.", before_call);
+call    0 returned 1
+        1:   42:	printf("%s", "\n");
+call    0 returned 1
+        -:   43:	printf("%d", testG.supplyCount[testG.hand[currentPlayer][choice1]]);
+        -:   44:}
+    #####:   45:else {
+call    0 never executed
+        -:   46:		printf("%s", "The incorrect number of choice1 cards were added to the supply.\n");
+        -:   47:
+        -:   48:}
+        -:   49:
+        -:   50://the same test with only one card chosen to discard successfully increases the supply by choice2 and then 
+        1:   51://decrements it for each other player, making it net zero.
+        1:   52:memcpy(&testG, &G, sizeof(struct gameState));
+        1:   53:choice2 = 1;
+        1:   54:before_call = (testG.supplyCount[testG.hand[currentPlayer][choice1]]) += choice2;
+call    0 returned 1
+        1:   55:ambassador_function(choice1, choice2, j, handpos, &testG, currentPlayer);
+call    0 returned 1
+        1:   56:printf("%s""%d", "THIS IS THE SUPPLY BEFORE THE CALL and BEFORE ADDING TWO: ", testG.supplyCount[testG.hand[currentPlayer][choice1]]);
+call    0 returned 1
+        -:   57:	printf("%s", "\n");
+        1:   58:
+branch  0 taken 1 (fallthrough)
+branch  1 taken 0
+        1:   59:if (testG.supplyCount[testG.hand[currentPlayer][choice1]] == (before_call)){
+call    0 returned 1
+        1:   60:	printf("%s""%d", "The correct number of choice1 cards were added to the supply.", before_call);
+call    0 returned 1
+        1:   61:	printf("%s", "\n");
+call    0 returned 1
+        1:   62:	printf("%d", testG.supplyCount[testG.hand[currentPlayer][choice1]]);
+call    0 returned 1
+        -:   63:		printf("%s", "\n");
+        -:   64:
+        -:   65:}
+    #####:   66:else {
+call    0 never executed
+    #####:   67:	printf("%s""%d", "The incorrect number of choice1 cards were added to the supply.", before_call);
+call    0 never executed
+    #####:   68:	printf("%s", "\n");
+call    0 never executed
+        -:   69:	printf("%d", testG.supplyCount[testG.hand[currentPlayer][choice1]]);
+        -:   70:
+        -:   71:}
+        -:   72:
+        -:   73://this test finds the second bug that was added, which skips the for loop before it gets to the card that is meant
+        1:   74://to be trashed because of an indexing error.
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+    #####:   75:if (testG.hand[currentPlayer][1] == -1){
+call    0 never executed
+        -:   76:	printf("%s", "The player successfully discarded the card that they added to the supply pile.\n");
+        -:   77:}
+        1:   78:else {
+call    0 returned 1
+        -:   79:	printf("%s", "The player did not successfully discard the card that they added to the supply pile.\n");
+        -:   80:
+        -:   81:}
+        -:   82:
+        1:   83:
+        -:   84:return 0;
+        -:   85:}
