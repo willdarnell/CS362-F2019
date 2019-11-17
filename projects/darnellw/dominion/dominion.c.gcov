@@ -1217,16 +1217,16 @@ function tribute_function called 100 returned 100% blocks executed 70%
         -:  878:    int i;
         -:  879:
       100:  880:    if ((state->discardCount[nextPlayer] + state->deckCount[nextPlayer]) <= 1) {
-branch  0 taken 45% (fallthrough)
-branch  1 taken 55%
-       45:  881:        if (state->deckCount[nextPlayer] > 0) {
+branch  0 taken 20% (fallthrough)
+branch  1 taken 80%
+       20:  881:        if (state->deckCount[nextPlayer] > 0) {
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
     #####:  882:            tributeRevealedCards[0] = state->deck[nextPlayer][state->deckCount[nextPlayer]-1];
     #####:  883:            state->deckCount[nextPlayer]--;
         -:  884:
         -:  885:        }
-       45:  886:        else if (state->discardCount[nextPlayer] > 0) {
+       20:  886:        else if (state->discardCount[nextPlayer] > 0) {
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
     #####:  887:            tributeRevealedCards[0] = state->discard[nextPlayer][state->discardCount[nextPlayer]-1];
@@ -1241,7 +1241,7 @@ branch  1 taken 100%
         -:  896:
         -:  897:        else {
         -:  898:
-       55:  899:            if (state->deckCount[nextPlayer] == 0) {
+       80:  899:            if (state->deckCount[nextPlayer] == 0) {
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
         -:  900:
@@ -1258,14 +1258,14 @@ branch  1 never executed
 call    0 never executed
         -:  909:            }
         -:  910:
-       55:  911:            tributeRevealedCards[0] = state->deck[nextPlayer][state->deckCount[nextPlayer]-1];
-       55:  912:            state->deck[nextPlayer][state->deckCount[nextPlayer]--] = -1;
+       80:  911:            tributeRevealedCards[0] = state->deck[nextPlayer][state->deckCount[nextPlayer]-1];
+       80:  912:            state->deck[nextPlayer][state->deckCount[nextPlayer]--] = -1;
         -:  913:
-       55:  914:            state->deckCount[nextPlayer]--;
+       80:  914:            state->deckCount[nextPlayer]--;
         -:  915:
-       55:  916:            tributeRevealedCards[1] = state->deck[nextPlayer][state->deckCount[nextPlayer]-1];
-       55:  917:            state->deck[nextPlayer][state->deckCount[nextPlayer]--] = -1;
-       55:  918:            state->deckCount[nextPlayer]--;
+       80:  916:            tributeRevealedCards[1] = state->deck[nextPlayer][state->deckCount[nextPlayer]-1];
+       80:  917:            state->deck[nextPlayer][state->deckCount[nextPlayer]--] = -1;
+       80:  918:            state->deckCount[nextPlayer]--;
         -:  919:        }
         -:  920:
       100:  921:        if (tributeRevealedCards[0] = tributeRevealedCards[1]) { 

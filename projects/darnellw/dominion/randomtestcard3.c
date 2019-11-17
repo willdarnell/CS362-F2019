@@ -8,14 +8,14 @@
 
 
 
-void main(){
+int main(){
 
     int i = 0;
-    for (i; i < 200; i++){
-        int currentPlayer = rand() % 4;
+    for (i; i < 100; i++){
+        int currentPlayer = rand() % 3;
         //setting up the test case taken from the example
         struct gameState G, testG;
-        int nextPlayer = rand() % 3;
+        int nextPlayer = rand() % 2;
         int numPlayers = rand() % 3;
 
         int seed = 1000;
@@ -58,7 +58,7 @@ void main(){
     
 
 
-
+return 0;
 
 
 

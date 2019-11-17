@@ -8,7 +8,7 @@
 
 
 
-void main(){
+int main(){
 
     int i = 0;
     for (i; i < 100; i++){
@@ -58,7 +58,7 @@ void main(){
     
 
 
-
+return 0;
 
 
 

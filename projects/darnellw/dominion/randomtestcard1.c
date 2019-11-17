@@ -1,14 +1,15 @@
-#include<stdio.h>
-#include<string.h>
-#include<stdlib.h>
-#include<time.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <time.h>
 #include "dominion.h"
 #include "dominion_helpers.h"
 #include "rngs.h"
+#include <assert.h>
 
 
 
-void main(){
+int main(){
 
     int i = 0;
     for (i; i < 100; i++){
@@ -61,7 +62,7 @@ void main(){
 
 
 
-
+return 0;
 
 
 }
