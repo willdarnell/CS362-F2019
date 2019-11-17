@@ -20,6 +20,16 @@ runtests: testDrawCard
 	./testDrawCard &> unittestresult.out
 	gcov dominion.c >> unittestresult.out
 	cat dominion.c.gcov >> unittestresult.out
+randomtestresults:
+	gcc -fprofile-arcs -ftest-coverage -o randomcard1 -g randomtestcard1.c dominion.c rngs.c 
+	./randomcard1 &> randomtestresults.out
+	gcov -f -b dominion.c >> randomtestresults.out
+	gcc -fprofile-arcs -ftest-coverage -o randomcard2 -g randomtestcard2.c dominion.c rngs.c 
+	./randomcard2 &> randomtestresults.out
+	gcov -f -b dominion.c >> randomtestresults.out
+	gcc -fprofile-arcs -ftest-coverage -o randomcard3 -g randomtestcard3.c dominion.c rngs.c 
+	./randomcard3 &> randomtestresults.out
+	gcov -f -b dominion.c >> randomtestresults.out
 
 
 player: player.c interface.o
