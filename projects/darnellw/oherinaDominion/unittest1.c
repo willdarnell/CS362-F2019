@@ -18,6 +18,7 @@ int return_number;
 //setting up the test case taken from the example
 struct gameState G, testG;
 int numPlayers = 2;
+int currentPlayer = 0;
 int seed = 1000;
 int k[10] = {copper, gold, silver, minion, mine, cutpurse,
 			sea_hag, tribute, smithy, council_room};
@@ -28,7 +29,7 @@ printf("%s""%d", "THIS IS THE OPENING HAND COUNT: ", G.handCount[0]);
 printf("%s", "\n");
 
 printf("%s", "This is the test for the mine card\n");
-return_number = mine_function(choice1, choice2, choice3, &testG, handpos, bonus, j, 0);
+return_number = cardEffectMine(currentPlayer, choice1, choice2, &testG, handpos);
 if ((G.hand[0][0] == copper) && (getCost(G.hand[0][0]) + 3 <= getCost(choice2))){
     if (return_number == 0){
         printf("%s", "the function executed when it should\n");

@@ -215,7 +215,7 @@ int shuffle(int player, struct gameState *state) {
     /* SORT CARDS IN DECK TO ENSURE DETERMINISM! */
 
     while (state->deckCount[player] > 0) {
-        card = floor(Random() * state->deckCount[player]);
+        card = Random() * state->deckCount[player];
         newDeck[newDeckPos] = state->deck[player][card];
         newDeckPos++;
         for (i = card; i < state->deckCount[player]-1; i++) {

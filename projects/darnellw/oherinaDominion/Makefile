@@ -20,19 +20,19 @@ interface.o: interface.h interface.c
 	gcc -c interface.c -g  $(CFLAGS)
 
 unittestresults: 
-	gcc -fprofile-arcs -ftest-coverage -o testcard1 -g unittest1.c dominion.c rngs.c 
+	gcc -fprofile-arcs -ftest-coverage -o testcard1 -g unittest1.c dominion.c rngs.c -std=c99 
 	./testcard1 &> unittestresult.out
 	gcov -f -b dominion.c >> unittestresult.out
-	gcc -fprofile-arcs -ftest-coverage -o testcard2 -g unittest2.c dominion.c rngs.c 
+	gcc -fprofile-arcs -ftest-coverage -o testcard2 -g unittest2.c dominion.c rngs.c -std=c99
 	./testcard2 >> unittestresult.out
 	gcov -f -b dominion.c >> unittestresult.out
-	gcc -fprofile-arcs -ftest-coverage -o testcard3 -g unittest3.c dominion.c rngs.c 
+	gcc -fprofile-arcs -ftest-coverage -o testcard3 -g unittest3.c dominion.c rngs.c -std=c99
 	./testcard3 >> unittestresult.out
 	gcov -f -b dominion.c >> unittestresult.out
-	gcc -fprofile-arcs -ftest-coverage -o testcard4 -g unittest4.c dominion.c rngs.c 
+	gcc -fprofile-arcs -ftest-coverage -o testcard4 -g unittest4.c dominion.c rngs.c -std=c99
 	./testcard4 >> unittestresult.out
 	gcov -f -b dominion.c >> unittestresult.out
-	gcc -fprofile-arcs -ftest-coverage -o testcard5 -g unittest5.c dominion.c rngs.c 
+	gcc -fprofile-arcs -ftest-coverage -o testcard5 -g unittest5.c dominion.c rngs.c -std=c99
 	./testcard5 >> unittestresult.out
 	gcov -f -b dominion.c >> unittestresult.out
 	
