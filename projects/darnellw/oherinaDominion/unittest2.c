@@ -12,6 +12,7 @@ int main () {
 
 int choice1 = 1;
 int currentPlayer = 0;
+int handPos = 0;
 //setting up the test case taken from the example
 struct gameState G, testG;
 int numPlayers = 2;
@@ -22,7 +23,8 @@ initializeGame(numPlayers, k, seed, &G);
 memcpy(&testG, &G, sizeof(struct gameState));
 
 printf("%s", "This is the test for the baron card\n");
-baron_function(currentPlayer, &testG, choice1);
+cardEffectBaron(choice1, &testG, currentPlayer, handPos);
+
 
 //test for number of buys increasing by one
 
@@ -54,7 +56,7 @@ else {
 }
 choice1 = 0;
 //the case for executing the second branch
-baron_function(currentPlayer, &testG, choice1);
+cardEffectBaron(choice1, &testG, currentPlayer, handPos);
 
 
 //another test case for if the second player gains the estate card
@@ -66,7 +68,7 @@ struct gameState testF;
 memcpy(&testF, &G, sizeof(struct gameState));
 testF.supplyCount[estate] = 1;
 
-baron_function(1, &testF, choice1);
+cardEffectBaron(choice1, &testF, currentPlayer, handPos);
 G.supplyCount[estate] = 1;
 
 //test to see if the supply count is double decremented when supply is 1. is a bug in the gain card function.

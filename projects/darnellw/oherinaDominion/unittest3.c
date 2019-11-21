@@ -22,7 +22,8 @@ memcpy(&testG, &G, sizeof(struct gameState));
 printf("%s", "This is the test for the minion card.\n");
 
 //first test to see if the actions are correctly implemented
-minion_function(choice1, choice2, 0, &testG, handpos, 0);
+cardEffectMinion(choice1, choice2, 0, &testG, handpos, 0);
+
 if (testG.numActions == ++G.numActions){
     printf("%s", "The number of actions was incremented correctly.\n");
 }
@@ -34,7 +35,7 @@ else {
 
 //change the decision to take the coins
 choice1 = 1;
-minion_function(choice1, choice2, 0, &testG, handpos, 0);
+cardEffectMinion(choice1, choice2, 0, &testG, handpos, 0);
 //second test to see if the coins is increased by 2 if the first choice is taken, which reveals the first bug
 //that I added for the minion function. This test fails because I changed the conditional to not increment the coins.
 if (testG.coins == (G.coins + 2)){
@@ -78,7 +79,7 @@ testK.hand[1][7] = copper;
 printf("%s""%d", "Other player's handcount before the function is called.", testK.handCount[1]);
 printf("%s", "\n");
 int pre_call_hand_count1 = testK.handCount[1];
-minion_function(choice1, choice2, 0, &testG, 1, 0);
+cardEffectMinion(choice1, choice2, 0, &testG, 1, 0);
 printf("%s""%d", "Current player's handcount at the end of the round.", testK.handCount[0]);
 printf("%s", "\n");
 if ((testK.handCount[0] == (pre_call_hand_count - pre_call_hand_count + 4))){
