@@ -15,6 +15,7 @@ printf("%s", "This is the test for the tribute card\n");
 
 int currentPlayer = 0;
 int nextPlayer = 1;
+int handpos = 0;
 int tributeRevealedCards[2];
 //setting up the test case taken from the example
 struct gameState G, testG, testk;
@@ -28,7 +29,7 @@ testG.deck[1][5] = smithy;
 testG.deck[1][6] = mine;
 testG.deck[1][7] = mine;
 testG.deck[1][8] = smithy;
-tribute_function(currentPlayer, nextPlayer, tributeRevealedCards, &testG);
+cardEffectTribute(nextPlayer, &testG, handpos, currentPlayer);
 
 //first test to find the first bug, which is an assignment bug, finding it requires commenting out a later for loop 
 //that has the second bug.
@@ -45,7 +46,7 @@ testk.deck[1][5] = smithy;
 testk.deck[1][6] = mine;
 testk.deck[1][7] = mine;
 testk.deck[1][8] = smithy;
-tribute_function(currentPlayer, nextPlayer, tributeRevealedCards, &testk);
+cardEffectTribute(nextPlayer, &testk, handpos, currentPlayer);
 //second test checks to see if the second revealed card equals smithy like it is supposed to. this finds
 //the second assignment bug which is setting it to copper instead of checking for copper.
 if (tributeRevealedCards[1] == 13){
@@ -61,7 +62,7 @@ initializeGame(numPlayers, k, seed, &G);
 memcpy(&testk, &G, sizeof(struct gameState));
 testk.discardCount[1]=0;
 testk.deckCount[1] = 1;
-tribute_function(currentPlayer, nextPlayer, tributeRevealedCards, &testk);
+cardEffectTribute(nextPlayer, &testk, handpos, currentPlayer);
 
 if (testk.deckCount[1] == 0){
         printf("%s", "The tribute funciton is working correctly for a one card deck.\n");
@@ -77,7 +78,7 @@ initializeGame(numPlayers, k, seed, &G);
 memcpy(&testk, &G, sizeof(struct gameState));
 testk.discardCount[1]=1;
 testk.deckCount[1] = 0;
-tribute_function(currentPlayer, nextPlayer, tributeRevealedCards, &testk);
+cardEffectTribute(nextPlayer, &testk, handpos, currentPlayer);
 
 if (testk.discardCount[1] == 0){
         printf("%s", "The tribute funciton is working correctly for a no card deck.\n");
@@ -93,7 +94,7 @@ initializeGame(numPlayers, k, seed, &G);
 memcpy(&testk, &G, sizeof(struct gameState));
 testk.discardCount[1]=10;
 testk.deckCount[1] = 0;
-tribute_function(currentPlayer, nextPlayer, tributeRevealedCards, &testk);
+cardEffectTribute(nextPlayer, &testk, handpos, currentPlayer);
 
 if (testk.discardCount[1] == 5){
         printf("%s", "The tribute funciton is working correctly for a no card deck with a large discard pile.\n");

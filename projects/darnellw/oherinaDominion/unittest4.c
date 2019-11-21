@@ -31,7 +31,8 @@ testG.hand[0][4] = smithy;
 choice1 = 1;
 choice2 = 2;
 int before_call = (testG.supplyCount[testG.hand[currentPlayer][choice1]]) += choice2;
-ambassador_function(choice1, choice2, j, handpos, &testG, currentPlayer);
+cardEffectAmbassador(choice1, choice2, &testG, handpos, currentPlayer);
+
 printf("%s""%d", "THIS IS THE SUPPLY BEFORE THE CALL and BEFORE ADDING TWO: ", testG.supplyCount[testG.hand[currentPlayer][choice1]]);
 printf("%s", "\n");
 
@@ -52,7 +53,7 @@ else {
 memcpy(&testG, &G, sizeof(struct gameState));
 choice2 = 1;
 before_call = (testG.supplyCount[testG.hand[currentPlayer][choice1]]) += choice2;
-ambassador_function(choice1, choice2, j, handpos, &testG, currentPlayer);
+cardEffectAmbassador(choice1, choice2, &testG, handpos, currentPlayer);
 printf("%s""%d", "THIS IS THE SUPPLY BEFORE THE CALL and BEFORE ADDING TWO: ", testG.supplyCount[testG.hand[currentPlayer][choice1]]);
 	printf("%s", "\n");
 
