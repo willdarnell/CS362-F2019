@@ -36,7 +36,16 @@ unittestresults:
 	./testcard5 >> unittestresult.out
 	gcov -f -b dominion.c >> unittestresult.out
 	
-	
+randomtestresults:
+	gcc -fprofile-arcs -ftest-coverage -o randomtest1 -g randomtestcard1.c dominion.c rngs.c -std=c99
+	./randomtest1
+	gcov -f -b dominion.c >> randomtestresults.out
+	gcc -fprofile-arcs -ftest-coverage -o randomtest2 -g randomtestcard2.c dominion.c rngs.c -std=c99
+	./randomtest2 
+	gcov -f -b dominion.c >> randomtestresults.out
+	gcc -fprofile-arcs -ftest-coverage -o randomtest3 -g randomtestcard3.c dominion.c rngs.c -std=c99
+	./randomtest3 
+	gcov -f -b dominion.c >> randomtestresults.out	
 
 
 player: player.c interface.o
